@@ -1,0 +1,39 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+	//recebe uma frase e retorn ela toda em maisuculas 
+	string converterMaiuscula(string frase){
+	 int tamanho = frase.size();
+
+    // Percorre cada caractere da frase
+    for (int i = 0; i < tamanho; i++){
+    	
+    	// se o caractere for uma letra minuscula ( de 'a' ate 'z')
+    	if (frase[i] >= 'a' && frase[i] <= 'z'){
+    		
+    		//subtrai 32 para chegar na letra maisucula correspondente 
+    		frase[i] = frase[i] - 32;
+		}
+	}
+	return frase;
+	
+	}
+int main(){
+    string frase;
+    
+    //getline le a ffrase inteira com espcacos 
+    cout << "Digite uma frase: ";
+    getline(cin, frase);
+    
+    //chama o metodo e guarda o resultado
+    string resultado = converterMaiuscula(frase);
+    
+    //mostra o resultado
+    
+cout << "Frase em maiuscula: " << resultado << endl;
+
+return 0;
+}
+     
