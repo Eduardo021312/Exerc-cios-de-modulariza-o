@@ -1,0 +1,40 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// recebe uma frase e uma letra e retorna quantas vezes a letra aparece na frase
+int contarLetras(string frase, char letra){ 
+    int contador = 0;
+    int tamanho = frase.size();
+
+    // Percorre cada caractere da frase
+    for (int i = 0; i < tamanho; i++){
+    	//se o caractere for igual a letra procurada, soma 1 no contador 
+        if (frase[i] == letra){
+            contador++;
+        }
+    }
+     // devolve o total encontrado 
+    return contador;
+}
+int main(){
+    string frase;
+    char letra;
+
+	// getline le a frase inteira com espacos 
+    cout << "Digite uma frase: ";
+    getline (cin, frase);
+    
+    //cin >> le somente uma letra
+    cout << "Digite uma letra: ";
+    cin >> letra;
+
+    // chama o método e guarda o resultado 
+    int total = contarLetras(frase, letra);
+    
+    //mostrar o resultado
+    cout << " A letra " << letra << " aparece " << total << " vezes "<< endl;
+    return 0;
+}
+     
