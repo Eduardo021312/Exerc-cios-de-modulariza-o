@@ -1,1 +1,116 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// verifica se a string possui somente digitos de 0 a 9
+
+bool somenteNumeros(string texto){
+	
+	// string vazia nao e numero
+	if(texto.size() == 0){
+		return 0;
+	}
+	// percorre cada caractere do texto
+	for (int i = 0; i < texto.size(); i++){
+		
+		//se o caractere estier fora de 0 a 9, nao e numero
+		if(texto[i] < '0' || texto[i] > '9') {
+			return 0;
+		}
+	}
+	// se chega ate aq, todos caracteres era numeros
+	return 1;
+}
+
+//verifica se o ano e bissexto
+
+bool anoBissexto(int ano){
+	//divisivel por 4 e nao por 100, ou divisivel por 400
+	
+	if((ano % 4 == 0 && ano % 100 != 0) || ano % 400 == 0){
+		return 1;
+	}
+	return 0;
+}
+// devolve quantos dias o mes possui naquele ano
+
+int diasNomes( int mes, int ano){
+	switch (mes){
+		
+		// fevereiro depende do ano bissexto
+		case 2: 
+		if(anoBissexto(ano)){
+			return 29;
+		}
+		return 28;
+		
+		case 4:
+		case 6:
+		case 9:
+		case 11:
+			return 30;
+			
+		// os demais meses tem 31 dias
+		default:
+			return 31;
+	}
+}
+// converte uma string de digitos para inteiro
+int converterParaInt(string texto) {
+    int numero = 0;
+
+    // percorre cada digito, da esquerda para a direita
+    for (int i = 0; i < texto.size(); i++) {
+        // empurra o numero uma casa para a esquerda e soma o novo digito
+        numero = numero * 10 + (texto[i] - '0');
+    }
+
+    return numero;
+}
+
+// verifica a data e escreve data valida ou data invalida 
+void verificarData(string dia, string mes, string ano){
+	
+	//se algum campo tiver ou estiver vazio, a data e invalida
+	if(!somenteNumeros(dia) || !somenteNumeros(mes) || !somenteNumeros(ano)){
+		cout << "DATA INVALIDA" << endl;
+		return;
+	}
+	
+	// limita o tamanho para o stoi nao estourar com numeros gigantes
+	if(dia.size() > 2 || mes.size() > 2 || ano.size() > 4){
+		cout << " DATA INVALIDA " << endl;
+		return;
+	}
+	//converte as string para inteiros 
+	
+	int d = converterParaInt(dia);
+	int m = converterParaInt(mes);
+	int a = converterParaInt(ano);
+	
+	//confere ano, mes e se o dia existe naquele mes
+	if(a < 1 || m < 1 || m > 12 || d < 1 || d > diasNomes(m, a)){
+		cout << "DATA INVALIDA" << endl;
+		
+	}else {
+		cout << "DATA VALIDA" << endl;
+	}
+}
+int main(){
+	string dia, mes, ano;
+	
+	//leitura dos tres campos como string
+	
+	cout << "Dgite o dia: ";
+	cin >> dia;
+	cout << "Digite o mes: ";
+	cin >> mes;
+	cout << "Digite o ano: ";
+	cin >> ano;
+	
+	//chama o metodo que escreve o resultado
+	verificarData(dia, mes, ano);
+	return 0;
+}
 
